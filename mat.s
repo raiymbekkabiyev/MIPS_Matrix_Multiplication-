@@ -7,20 +7,30 @@
         .word 0,0,0,0
     promt1:
         .asciiz "Mat A: \n"
+    promt2:
+        .asciiz "Mat B: \n"
     new_line: 
     	.asciiz "\n" 
     space: 
     	.asciiz " "
-
+    n:
+        .word 2
 .text
 main:
+    la $s1, n
+    lw $s1, 0($s1)
     la $s2, matA
+    la $s3, matB
     j print
 
 
 print:
     la $a0, promt1
     la $a1, matA
+    jal printMat
+
+    la $a0, promt2
+    la $a1, matB
     jal printMat
 
     #exit
@@ -52,4 +62,3 @@ PL2:	addi	$a2,$a2,1
 		syscall
 		b	PL4
 PL1:	jr	$ra
-
