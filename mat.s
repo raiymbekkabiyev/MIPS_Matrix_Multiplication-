@@ -26,8 +26,26 @@ print:
 printMat:
     li $v0, 4 #print string
     syscall
+    addi $a2,$0,0	
+	
+PL4:	bge	$a2,$s1,PL1
+		addi $a3,$0,0
+PL3:	bge	$a3,$s1,PL2
 
+		lw	$a0,0($a1)
+		li	$v0,1
+		syscall
+		la	$a0,sp
+		li	$v0,4
+		syscall
+		addi $a1,$a1,4
+		addi $a3,$a3,1
+		b 	PL3
 
-
-
+PL2:	addi	$a2,$a2,1
+		la	$a0,nline
+		li	$v0,4
+		syscall
+		b	PL4
+PL1:	jr	$ra
 
