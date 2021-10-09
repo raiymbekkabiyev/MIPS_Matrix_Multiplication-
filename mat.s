@@ -7,6 +7,10 @@
         .word 0,0,0,0
     promt1:
         .asciiz "Mat A: \n"
+    new_line: 
+    	.asciiz "\n" 
+    space: 
+    	.asciiz " "
 
 .text
 main:
@@ -35,7 +39,7 @@ PL3:	bge	$a3,$s1,PL2
 		lw	$a0,0($a1)
 		li	$v0,1
 		syscall
-		la	$a0,sp
+		la	$a0,space
 		li	$v0,4
 		syscall
 		addi $a1,$a1,4
@@ -43,7 +47,7 @@ PL3:	bge	$a3,$s1,PL2
 		b 	PL3
 
 PL2:	addi	$a2,$a2,1
-		la	$a0,nline
+		la	$a0,new_line
 		li	$v0,4
 		syscall
 		b	PL4
